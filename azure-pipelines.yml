@@ -31,10 +31,10 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
   displayName: 'Publish Artifact'
-
-- download: current
-  artifact: drop
-  displayName: 'Download Artifact'
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: 'drop'
+    displayName: 'Download Artifact'
 
 - task: AzureWebApp@1
   inputs:
