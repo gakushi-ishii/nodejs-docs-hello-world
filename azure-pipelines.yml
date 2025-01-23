@@ -24,4 +24,4 @@ steps:
     azureSubscription: 'MCAPS-Support-REQ-77977-2024-gakushiishii(258bd4ed-d961-49e0-94c5-0bf482ec0300)'
     appType: 'webAppLinux'
     appName: 'gi-linux-node20'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    package: '/home/site/wwwroot/release.zip'
