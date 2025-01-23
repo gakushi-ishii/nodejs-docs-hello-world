@@ -19,9 +19,26 @@ steps:
     npm install || true
     npm run build || true
   displayName: 'npm install and build'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/release.zip'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy files to staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+  displayName: 'Publish Artifact'
+
+- download: current
+  artifact: drop
+  displayName: 'Download Artifact'
+
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'MCAPS-Support-REQ-77977-2024-gakushiishii(258bd4ed-d961-49e0-94c5-0bf482ec0300)'
     appType: 'webAppLinux'
     appName: 'gi-linux-node20'
-    package: '/home/site/wwwroot/release.zip'
+    package: '$(Pipeline.Workspace)/drop/release.zip'
